@@ -5,7 +5,9 @@ import './App.css';
 import AboutUs from './AboutUs';
 
 function App() {
-  
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log("Cart:", cartItems);
+
   const [showProductList, setShowProductList] = useState(false);
 
   const handleGetStartedClick = () => {

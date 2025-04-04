@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../redux/CartSlice'; 
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
@@ -232,6 +234,9 @@ function ProductList() {
     fontSize: '30px',
     textDecoration: 'none',
    }
+   const ProductList = ({ product }) => {
+    const dispatch = useDispatch();
+    const [addedToCart, setAddedToCart] = useState({});
    const handleCartClick = (e) => {
     e.preventDefault();
     setShowCart(true); // Set showCart to true when cart icon is clicked
@@ -246,6 +251,9 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
+  const ProductList = ({ product }) => {
+  const dispatch = useDispatch();
+  const [addedToCart, setAddedToCart] = useState({});
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
     setAddedToCart((prevState) => ({
@@ -253,6 +261,15 @@ const handlePlantsClick = (e) => {
        [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
      }));
   };
+  return (
+    <div>
+      <h2>{product.name}</h2>
+      <button onClick={() => handleAddToCart(product)}>
+        {addedToCart[product.name] ? 'Added' : 'Add to Cart'}
+      </button>
+    </div>
+  );
+};
     return (
         <div>
              <div className="navbar" style={styleObj}>
